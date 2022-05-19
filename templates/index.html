@@ -1,0 +1,101 @@
+{% extends 'base.html' %}
+{#{% load myfilter %}#}
+{% load static %}
+{% block title %}
+    天天生鲜-首页
+{% endblock title %}
+{% block top_js_file %}
+	<script type="text/javascript" src="{% static 'js/jquery-1.12.4.min.js'%}"></script>
+	<script type="text/javascript" src="{% static 'js/jquery-ui.min.js'%}"></script>
+	<script type="text/javascript" src="{% static 'js/slide.js'%}"></script>
+{% endblock top_js_file %}
+{% block body %}
+	<div class="navbar_con">
+		<div class="navbar">
+			<h1 class="fl">全部商品分类</h1>
+			<ul class="navlist fl">
+				<li><a href="">首页</a></li>
+				<li class="interval">|</li>
+				<li><a href="">手机生鲜</a></li>
+				<li class="interval">|</li>
+				<li><a href="">抽奖</a></li>
+			</ul>
+		</div>
+	</div>
+
+	<div class="center_con clearfix">
+		<ul class="subnav fl">
+            {% for i in goods_types %}
+{#              forloop.counter 获取当前for循环次数#}
+				<li><a href="#model0{{ forloop.counter }}" class="{{ i.logo }}">{{ i.name }}</a></li>
+            {% endfor %}
+		</ul>
+		<div class="slide fl">
+			<ul class="slide_pics">
+                {% for i in goods_banner %}
+                    <li><a href="{% url 'goods:detail' sku_id=i.sku.id %}"><img src="{{ i.image.url }}" alt="幻灯片"></a></li>
+                {% endfor %}
+			</ul>
+			<div class="prev"></div>
+			<div class="next"></div>
+			<ul class="points"></ul>
+		</div>
+		<div class="adv fl">
+            {% for i in promotion_banner %}
+			    <a href="{{ i.url }}"><img src="{{ i.image.url }}"></a>
+            {% endfor %}
+		</div>
+	</div>
+    {% for i in goods_types %}
+	<div class="list_model">
+		<div class="list_title clearfix">
+			<h3 class="fl" id="model0{{ forloop.counter }}">{{ i.name }}</h3>
+			<div class="subtitle fl">
+				<span>|</span>
+
+                {% for i in i.title_banner %}
+				<a href="{% url 'goods:detail' sku_id=i.sku.id %}">{{ i.sku.name }}</a>
+                {% endfor %}
+{#                {% for i in type_goods %}#}
+{#				<a href="#">{{ i.sku.spu.name | filter:'1'}}</a>#}
+{#                    {% endfor %}#}
+			</div>
+			<a href="#" class="goods_more fr" id="fruit_more">查看更多 ></a>
+		</div>
+
+		<div class="goods_con clearfix">
+			<div class="goods_banner fl"><img src="{{ i.image.url }}"></div>
+			<ul class="goods_list fl">
+            {% for i in i.image_banner %}
+				<li>
+					<h4><a href="#">{{ i.sku.name }}</a></h4>
+					<a href="{% url 'goods:detail' sku_id=i.sku.id %}"><img src="{{ i.sku.image.url }}"></a>
+					<div class="prize">{{ i.sku.price }}</div>
+				</li>
+            {% endfor %}
+			</ul>
+		</div>
+	</div>
+    {% endfor %}
+
+
+{% endblock body %}
+{#{% block bottom_js %}#}
+{#	<script type="text/javascript" src="js/slideshow.js"></script>#}
+{#	<script type="text/javascript">#}
+{#		BCSlideshow('focuspic');#}
+{#		var oFruit = document.getElementById('fruit_more');#}
+{#		var oShownum = document.getElementById('show_count');#}
+{##}
+{#		var hasorder = localStorage.getItem('order_finish');#}
+{##}
+{#		if(hasorder)#}
+{#		{#}
+{#			oShownum.innerHTML = '2';#}
+{#		}#}
+{##}
+{#		oFruit.onclick = function(){#}
+{#			window.location.href = 'list.html';#}
+{#		}#}
+{#	</script>#}
+{#{% endblock bottom_js %}#}

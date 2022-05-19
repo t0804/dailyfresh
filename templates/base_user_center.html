@@ -1,0 +1,23 @@
+{% extends 'base_no_cart.html' %}
+{% block title %}
+天天生鲜-用户中心
+{% endblock title %}
+{% block search_bar_title %}
+用户中心
+{% endblock search_bar_title %}
+
+{% block body %}
+    <div class="main_con clearfix">
+		<div class="left_menu_con clearfix">
+			<h3>用户中心</h3>
+			<ul>
+				<li><a href="{% url 'user:user_center_info' %}" {% if html_class == 'info' %}class="active"{% endif %}>· 个人信息</a></li>
+				<li><a href="{% url 'user:user_center_order' 1 %}" {% if html_class == 'order' %}class="active"{% endif %}>· 全部订单</a></li>
+				<li><a href="{% url 'user:user_center_address' %}" {% if html_class == 'address' %}class="active"{% endif %}>· 收货地址</a></li>
+			</ul>
+		</div>
+        {% block user_center_right_content %}
+        {% endblock user_center_right_content %}
+	</div>
+
+{% endblock body %}
