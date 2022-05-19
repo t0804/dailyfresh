@@ -1,6 +1,13 @@
 ###dailyfresh
 ###Django-天天生鲜项目
 
+使用了用户内建系统
+
+使用celery异步处理发送激活邮件和生成静态页面
+仅支持支付宝支付，且是沙箱环境，正是环境需要更改连接为https://openapi.alipay.com/gateway.do
+
+
+
 ####server
     
     mysql-server    192.168.47.131:3306
@@ -17,6 +24,7 @@
     /etc/fdfs/storage.conf
     
     celery_worker   192.168.47.131
+    uwsgi 192.168.47.131:8080
 
 ###admin superuser
     
@@ -29,6 +37,7 @@
     123456
 
 ###nginx静态页面
-192.168.47.131:80/index
+192.168.47.131/
 ###nginx
+192.168.47.131
 
